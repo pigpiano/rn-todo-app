@@ -1,9 +1,11 @@
 import { StatusBar } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import { Text, View } from 'react-native';
 import styled, {ThemeProvider} from 'styled-components/native';
 import {theme} from './theme';
 import Input from './components/Input';
+
+
 
 
 // 타이틀 만들기
@@ -26,7 +28,19 @@ const Title = styled.Text`
 
     
 export default function App() {
+    //입력되는 값을 이용할 수 있도록 Input 컴포넌트에 이벤트를 등록하겠습니다.
+    const [newTask, setNewTask] = useState('');
+
+    const _addTask = () => {
+        alert(`Add: ${newTask}`);
+        setNewTask('');
+    }
+    const _handleTextChange = text => {
+        setNewTask(text);
+    };
+
   return (
+    
   <ThemeProvider theme={theme}>
     <Container>
         <StatusBar 
@@ -36,7 +50,11 @@ export default function App() {
             />           
       <Title>TODO List</Title>
 
-      <Input placeholder="+ Add a Task" /> 
+      <Input placeholder="+ Add a Task"
+            value={newTask}
+            onChangeText={_handleTextChange}
+            onSubmitEditing={_addTask}              
+                /> 
 
       </Container>
   </ThemeProvider>
