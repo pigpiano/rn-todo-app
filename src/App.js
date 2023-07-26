@@ -35,16 +35,41 @@ const List = styled.ScrollView`
 export default function App() {
     //입력되는 값을 이용할 수 있도록 Input 컴포넌트에 이벤트를 등록하겠습니다.
     const [newTask, setNewTask] = useState('');
+    const [tasks, setTasks] = useState({
+        '1': {id: '1', text: 'Hanbit', check: false},
+        '2': {id: '2', text: 'React Native', check: true},
+        '3': {id: '3', text: 'React Native Sample', check: false},
+        '4': {id: '4', text: 'Edit TODO Item', check: false}
+    });
 
-    const _addTask = () => {
-        alert(`Add: ${newTask}`);
-        setNewTask('');
+    const _addTask = () => { // _addTask 함수가 호출되면 tasks에 새로운 할 일 항목이 추가된다
+        const ID = Date.now().toString();
+        const newTaskObject = {
+            [ID]: { id: ID, text: newTask, check: false},
+        };
+        setNewTask(''); //input component 초기화하고 기존의 목록을 유지한 상태에서 새로운 항목이 추가되도록 구성
+        setTasks({ ...tasks, ...newTaskObject});
     }
+    const _deleteTask = id => { // 항목의 id를 이용하여 tasks에서 해당 항목을 삭제하는 함수 정의
+        const currentTasks = Object.assign({}, tasks);
+        delete currentTasks[id];
+        setTasks(currentTasks);
+    };
+
+    const _toggleTask = id => { //완료기능 구현, 항목을 완료상태로 만들어도 다시 미완료 상태로 돌아올 수 있도록 하기.
+        const currentTasks = Object.assign({}, tasks);
+        currentTasks[id]['check'] = !currentTasks[id]['check'];
+        setTasks(currentTasks);
+    }
+
     const _handleTextChange = text => {
         setNewTask(text);
     };
 
      const width = Dimensions.get('window').width;
+     
+
+     
 
     return (
     
@@ -68,11 +93,15 @@ export default function App() {
         <IconButton type={images.delete} />
         <IconButton type={images.update} /> */}
 
+        
         <List width ={width}>
-            <Task text="Hanbit" />
+            {Object.values(tasks).reverse() // 최신 항목이 가장 앞에 보이도록 tasks를 역순으로 렌더링되게 작성.
+            .map(item => (<Task key={item.id} item = {item} deleteTask = {_deleteTask} toggleTask={_toggleTask}/> ))} 
+
+            {/* <Task text="Hanbit" />
             <Task text="React Native" />
             <Task text="React Native Sample" />
-            <Task text="Edit TODO Item" />
+            <Task text="Edit TODO Item" /> */}
         </List>
 
       </Container>
