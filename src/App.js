@@ -1,4 +1,4 @@
-import { StatusBar } from 'react-native';
+import { Dimensions, StatusBar } from 'react-native';
 import React, {useState} from 'react';
 import { Text, View } from 'react-native';
 import styled, {ThemeProvider} from 'styled-components/native';
@@ -6,9 +6,7 @@ import {theme} from './theme';
 import Input from './components/Input';
 import IconButton from './components/IconButton';
 import { images } from './images';
-
-
-
+import Task from './components/Task'
 
 // 타이틀 만들기
 // 노치 디자인이 있는 기기는 Title 컴포넌트의 일부가 가려짐 -> SafeAreaView 컴포넌트로 해결
@@ -27,8 +25,13 @@ const Title = styled.Text`
     margin: 0px 20px;
     `;
 
+// Task 컴포넌트 만들기 -> 완료, 입력할 내용, 수정, 삭제 버튼으로 구성된다.
+// ScrollView 컴포넌트를 이용해, 할 일 항목의 수가 많아져서 화면을 넘어가도 스크롤을 이용할 수 있도록 화면을 구성.
+const List = styled.ScrollView`
+  flex: 1;
+  width: ${({ width }) => width - 40}px;
+`;
 
-    
 export default function App() {
     //입력되는 값을 이용할 수 있도록 Input 컴포넌트에 이벤트를 등록하겠습니다.
     const [newTask, setNewTask] = useState('');
@@ -41,7 +44,9 @@ export default function App() {
         setNewTask(text);
     };
 
-  return (
+     const width = Dimensions.get('window').width;
+
+    return (
     
   <ThemeProvider theme={theme}>
     <Container>
@@ -58,10 +63,17 @@ export default function App() {
             onSubmitEditing={_addTask}              
                 /> 
 
-        <IconButton type={images.check} />
-        <IconButton type={images.uncheck} />
+        {/* <IconButton type={images.check} />
+        <IconButton type={images.uncheck} /> 
         <IconButton type={images.delete} />
-        <IconButton type={images.update} />
+        <IconButton type={images.update} /> */}
+
+        <List width ={width}>
+            <Task text="Hanbit" />
+            <Task text="React Native" />
+            <Task text="React Native Sample" />
+            <Task text="Edit TODO Item" />
+        </List>
 
       </Container>
   </ThemeProvider>
