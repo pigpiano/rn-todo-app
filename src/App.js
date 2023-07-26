@@ -4,6 +4,8 @@ import { Text, View } from 'react-native';
 import styled, {ThemeProvider} from 'styled-components/native';
 import {theme} from './theme';
 import Input from './components/Input';
+import IconButton from './components/IconButton';
+import { images } from './images';
 
 
 
@@ -55,6 +57,11 @@ export default function App() {
             onChangeText={_handleTextChange}
             onSubmitEditing={_addTask}              
                 /> 
+
+        <IconButton type={images.check} />
+        <IconButton type={images.uncheck} />
+        <IconButton type={images.delete} />
+        <IconButton type={images.update} />
 
       </Container>
   </ThemeProvider>

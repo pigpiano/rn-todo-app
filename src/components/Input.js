@@ -41,7 +41,6 @@ const Input = ({
     />
   );
 };
-
 Input.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
