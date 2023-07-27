@@ -22,7 +22,7 @@ const Contents = styled.Text `
     text-decoration-line: ${({ check}) => check ? 'line-through' : 'none' };
     `;
 
-const Task = ({ item, deleteTask, toggleTask, updateTask}) => {
+const Task = ({ item, deleteTask, toggleTask, updateTask,}) => {
     const [isEditing, setIsEditing] = useState(false); // 수정 상태를 관리하기 위해 isEditing 변수 생성. 수정 버튼을 클릭하면 값이 변하도록 설정
     const [text, setText] = useState(text);
 
@@ -38,11 +38,19 @@ const _onSubmitEditing = () => {
     }
 };
 
+const _onBlur = () => { // 포커스를 잃으면 초기화 되도록 설정
+    if(isEditing) {
+        setIsEditing(false);
+        setText(item.text);
+    }
+};
+
     return isEditing ? (
         <Input // 수정되는 내용을 담을 text 변수를 생성하고 Input 컴포넌트의 값으로 설정했습니다.  
             value={text}
             onChangeText={text => setText(text)} // Input 컴포넌트에서 완료 버튼을 누르면 App 컴포넌트에서 전달된 updateTask함수가 호출
-            onSubmitEditing={_onSubmitEditing} /> ) : (
+            onSubmitEditing={_onSubmitEditing}
+            onBlur={_onBlur} /> ) : (
         <Container>
 
             <IconButton type={item.check? images.check : images.uncheck} 

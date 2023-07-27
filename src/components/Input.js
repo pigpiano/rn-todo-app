@@ -15,7 +15,8 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
   background-color: ${({ theme }) => theme.itemBackground};
   color: ${({ theme }) => theme.text};
 `;
-
+// 항목을 수정하거나 추가하는 도중에는 입력을 취소할 수 없기 때문에 입력중 다른 영역을 클릭해서 
+// Input 컴포넌트가 포커스를 잃으면 입력 중인 내용이 사라지고 취소되도록 Input 컴포넌트를 수정
 const Input = ({
   placeholder,
   value,
@@ -41,12 +42,13 @@ const Input = ({
     />
   );
 };
+// Input 컴포넌트에 onBlur 함수가 반드시 전달되도록 propTypes를 수정하고 전달된 함수를 사용하기
 Input.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChangeText: PropTypes.func.isRequired,
   onSubmitEditing: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
+  onBlur: PropTypes.func.isRequired
 };
 
 export default Input;
