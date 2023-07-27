@@ -62,6 +62,12 @@ export default function App() {
         setTasks(currentTasks);
     }
 
+    const _updateTask = item => { // 수정 완료된 항목이 전달되면 tasks에서 해당 항목을 변경하는 함수를 작성.
+        const currentTasks = Object.assign({}, tasks);
+        currentTasks[item.id] = item; 
+        setTasks(currentTasks);
+    }
+
     const _handleTextChange = text => {
         setNewTask(text);
     };
@@ -96,7 +102,9 @@ export default function App() {
         
         <List width ={width}>
             {Object.values(tasks).reverse() // 최신 항목이 가장 앞에 보이도록 tasks를 역순으로 렌더링되게 작성.
-            .map(item => (<Task key={item.id} item = {item} deleteTask = {_deleteTask} toggleTask={_toggleTask}/> ))} 
+            .map(item => (<Task key={item.id} item = {item} deleteTask = {_deleteTask} toggleTask={_toggleTask} 
+                updateTask = {_updateTask}
+            /> ))} 
 
             {/* <Task text="Hanbit" />
             <Task text="React Native" />
