@@ -1,4 +1,4 @@
-# rn-todo-app
+# rn-todo-app by React native
 
 ## 폴더 구조
 
