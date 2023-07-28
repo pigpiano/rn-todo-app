@@ -27,3 +27,4 @@ npm start
 ```
 
 ## 예시 화면
+<img width="340" alt="스크린샷 2023-07-28 오후 1 59 02" src="https://github.com/pigpiano/rn-todo-app/assets/63538435/abc5b09c-8c25-407b-8188-aa97cbdec952">
