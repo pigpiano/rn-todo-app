@@ -4,8 +4,6 @@
 
 src 폴더를 만들어서 그 안에 App.js, components 폴더 등을 만들어서 작업한다.
 
-#
-
 ## 기능
 
 - 등록: 할 일 항목을 추가하는 기능
@@ -27,3 +25,5 @@ https://github.com/pigpiano/rn-todo-app.git
 npm install
 npm start
 ```
+
+## 예시 화면
