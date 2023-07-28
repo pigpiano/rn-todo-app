@@ -4,17 +4,19 @@
     "slug": "rn-todo-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/free-icon-alien-head-by-Freepik.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/free-icon-alien-head-by-Freepik.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#778bdd"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.pigpiano.rntodoapp",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
